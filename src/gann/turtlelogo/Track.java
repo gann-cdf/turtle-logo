@@ -41,15 +41,17 @@ public class Track {
    * @param color  Turtle's pen color at the time it left the track
    * @param stroke Turtle's pen stroke (width) at the time it left the track
    */
-  public Track(double x1, double y1, double x2, double y2, Color color, Stroke stroke) {
+  public Track(double x1, double y1, double x2, double y2, Color color, Stroke stroke, Turtle.UnderTheShell key) {
+    key.hashCode();
     segment = new Line2D.Double(x1, y1, x2, y2);
     this.color = color;
     this.stroke = stroke;
   }
 
-  public void draw(Graphics2D graphics2d) {
-    graphics2d.setPaint(color);
-    graphics2d.setStroke(stroke);
-    graphics2d.draw(segment);
+  public void draw(Graphics2D context, Terrarium.UnderTheSurface key) {
+    key.hashCode();
+    context.setPaint(color);
+    context.setStroke(stroke);
+    context.draw(segment);
   }
 }

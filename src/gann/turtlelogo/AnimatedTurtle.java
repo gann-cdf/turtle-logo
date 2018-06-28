@@ -250,12 +250,13 @@ public class AnimatedTurtle extends Turtle implements Runnable {
     }
   }
 
-  public void draw(Graphics2D graphics) {
+  public void draw(Graphics2D context, Terrarium.UnderTheSurface key) {
+    key.hashCode();
     if (active == null) {
-      super.draw(graphics);
+      super.draw(context, key);
     } else {
-      graphics.setPaint(getPenColor());
-      graphics.setStroke(getPenStroke());
+      context.setPaint(getPenColor());
+      context.setStroke(getPenStroke());
       switch (active.getVerb()) {
         case MOVE:
         case MOVE_TO:
@@ -266,15 +267,15 @@ public class AnimatedTurtle extends Turtle implements Runnable {
           double tempX = getX() + Math.cos(moveHeadingInRadians) * steps;
           double tempY = getY() + Math.sin(moveHeadingInRadians) * steps;
           if (isPenDown()) {
-            graphics.draw(new Line2D.Double(getX(), getY(), tempX, tempY));
+            context.draw(new Line2D.Double(getX(), getY(), tempX, tempY));
           }
           if (!isHidden()) {
-            drawIcon(tempX, tempY, getHeadingInRadians(), graphics);
+            drawIcon(tempX, tempY, getHeadingInRadians(), context, UNDER_THE_SHELL);
           }
           break;
         case TURN:
           if (!isHidden()) {
-            drawIcon(getX(), getY(), Math.toRadians(getHeadingInDegrees() + degrees), graphics);
+            drawIcon(getX(), getY(), Math.toRadians(getHeadingInDegrees() + degrees), context, UNDER_THE_SHELL);
           }
           break;
       }

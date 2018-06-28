@@ -9,6 +9,19 @@ import java.util.List;
  * A turtle lives (and draws) inside a Terrarium;
  */
 public class Terrarium extends JPanel {
+  /**
+   * The parts of the terrarium that are "under the surface" are not meant to be used by students. This mechanism
+   * (inspired by <a href="https://stackoverflow.com/a/18634125">this awesome Stack Overflow answer</a>) recreates a
+   * version of the C++ <code>friend</code> concept: a public method that is only available to <i>some</i> other
+   * objects, rather than <i>all</i> other objects.
+   *
+   * @author <a href="https://github.com/battis">Seth Battis</a>
+   */
+  public static final class UnderTheSurface {
+    private UnderTheSurface() {}
+  }
+  protected static final UnderTheSurface UNDER_THE_SURFACE = new UnderTheSurface();
+
   public static final int
           DEFAULT_WIDTH = 600,
           DEFAULT_HEIGHT = 400;
@@ -25,10 +38,10 @@ public class Terrarium extends JPanel {
     turtles = new ArrayList<>();
     tracks = new ArrayList<>();
     getFrame();
-    register(this);
+    addInstance(this);
   }
 
-  private static void register(Terrarium terrarium) {
+  private static void addInstance(Terrarium terrarium) {
     if (terraria == null) {
       terraria = new ArrayList<>();
     }
@@ -42,7 +55,7 @@ public class Terrarium extends JPanel {
   public static Terrarium getInstance(int index) {
     if (terraria == null) {
       terraria = new ArrayList<>();
-      terraria.add(new Terrarium());
+      new Terrarium();
     }
     return terraria.get(index);
   }
@@ -59,7 +72,8 @@ public class Terrarium extends JPanel {
     return frame;
   }
 
-  public synchronized void add(Track track) {
+  public synchronized void add(Track track, Turtle.UnderTheShell key) {
+    key.hashCode();
     tracks.add(track);
   }
 
@@ -67,11 +81,13 @@ public class Terrarium extends JPanel {
     tracks.clear();
   }
 
-  public synchronized void add(Turtle turtle) {
+  public synchronized void add(Turtle turtle, Turtle.UnderTheShell key) {
+    key.hashCode();
     turtles.add(turtle);
   }
 
-  public synchronized void remove(Turtle turtle) {
+  public synchronized void remove(Turtle turtle, Turtle.UnderTheShell key) {
+    key.hashCode();
     turtles.remove(turtle);
   }
 
@@ -87,15 +103,15 @@ public class Terrarium extends JPanel {
   }
 
   @Override
-  public synchronized void paintComponent(Graphics graphics) {
-    super.paintComponent(graphics);
-    Graphics2D graphics2d = (Graphics2D) graphics;
-    graphics2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+  public synchronized void paintComponent(Graphics reverseCompatibleContext) {
+    super.paintComponent(reverseCompatibleContext);
+    Graphics2D context = (Graphics2D) reverseCompatibleContext;
+    context.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     for (Track track : tracks) {
-      track.draw(graphics2d);
+      track.draw(context, UNDER_THE_SURFACE);
     }
     for (Turtle turtle : turtles) {
-      turtle.draw(graphics2d);
+      turtle.draw(context, UNDER_THE_SURFACE);
     }
   }
 }

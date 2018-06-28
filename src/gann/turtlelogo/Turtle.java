@@ -7,10 +7,21 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Turtle {
+  /**
+   * The parts of the turtle that are "under the shell" are not meant to be used by students. This mechanism
+   * (inspired by <a href="https://stackoverflow.com/a/18634125">this awesome Stack Overflow answer</a>) recreates a
+   * version of the C++ <code>friend</code> concept: a public method that is only available to <i>some</i> other
+   * objects, rather than <i>all</i> other objects.
+   *
+   * @author <a href="https://github.com/battis">Seth Battis</a>
+   */
+  public static final class UnderTheShell {
+    private UnderTheShell() {
+    }
+  }
 
-  public static final int
-          DEFAULT_CANVAS_WIDTH = 600, // pixels
-          DEFAULT_CANVAS_HEIGHT = 400; // pixels
+  protected static final UnderTheShell UNDER_THE_SHELL = new UnderTheShell();
+
   public static final double DEFAULT_HEADING_IN_DEGREES = 0.0; // degrees
   public static final Color DEFAULT_COLOR = Color.black;
   public static final BasicStroke DEFAULT_STROKE = new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
@@ -32,18 +43,19 @@ public class Turtle {
   private boolean hidden;
 
   public Turtle() {
-    this(DEFAULT_CANVAS_WIDTH, DEFAULT_CANVAS_HEIGHT);
+    this(Terrarium.getInstance());
   }
 
-  public Turtle(int width, int height) {
-    this.x = width / 2.0;
-    this.y = height / 2.0;
+  public Turtle(Terrarium terrarium) {
+    this.x = terrarium.getWidth() / 2.0;
+    this.y = terrarium.getHeight() / 2.0;
     this.headingInDegrees = DEFAULT_HEADING_IN_DEGREES;
     this.penColor = DEFAULT_COLOR;
     this.penStroke = DEFAULT_STROKE;
     this.penDown = DEFAULT_PEN_DOWN;
     this.hidden = DEFAULT_HIDDEN;
-    getTerrarium();
+    this.terrarium = terrarium;
+    this.terrarium.add(this, UNDER_THE_SHELL);
   }
 
   public double getX() {
@@ -87,6 +99,7 @@ public class Turtle {
       try {
         icon = ImageIO.read(getClass().getResource("/turtlelogo/turtle.png"));
       } catch (IOException e) {
+        System.err.println("The image file containing the turtle icon could not be found and/or opened.");
         e.printStackTrace();
       }
     }
@@ -94,19 +107,15 @@ public class Turtle {
   }
 
   public Terrarium getTerrarium() {
-    if (terrarium == null) {
-      terrarium = Terrarium.getInstance();
-      terrarium.add(this);
-    }
     return terrarium;
   }
 
   public void setTerrarium(Terrarium terrarium) {
     if (this.terrarium != null) {
-      this.terrarium.remove(this);
+      this.terrarium.remove(this, UNDER_THE_SHELL);
     }
     this.terrarium = terrarium;
-    terrarium.add(this);
+    terrarium.add(this, UNDER_THE_SHELL);
   }
 
   public void bk(double steps) {
@@ -129,7 +138,7 @@ public class Turtle {
     double newX = x + Math.cos(getHeadingInRadians()) * steps,
             newY = y + Math.sin(getHeadingInRadians()) * steps;
     if (penDown) {
-      getTerrarium().add(new Track(x, y, newX, newY, penColor, penStroke));
+      getTerrarium().add(new Track(x, y, newX, newY, penColor, penStroke, UNDER_THE_SHELL), UNDER_THE_SHELL);
     }
     x = newX;
     y = newY;
@@ -141,7 +150,7 @@ public class Turtle {
 
   public void moveTo(double x, double y) {
     if (penDown) {
-      getTerrarium().add(new Track(this.x, this.y, x, y, penColor, penStroke));
+      getTerrarium().add(new Track(this.x, this.y, x, y, penColor, penStroke, UNDER_THE_SHELL), UNDER_THE_SHELL);
     }
     this.x = x;
     this.y = y;
@@ -184,6 +193,7 @@ public class Turtle {
   public void hd(double heading) {
     head(heading);
   }
+
   public void head(double heading) {
     this.headingInDegrees = heading % 360;
   }
@@ -207,6 +217,7 @@ public class Turtle {
   public void pc(Color color) {
     penColor(color);
   }
+
   public void penColor(Color color) {
     penColor = color;
   }
@@ -235,17 +246,19 @@ public class Turtle {
     hidden = false;
   }
 
-  public void draw(Graphics2D graphics) {
-    drawIcon(x, y, getHeadingInRadians(), graphics);
+  public void draw(Graphics2D context, Terrarium.UnderTheSurface key) {
+    key.hashCode();
+    drawIcon(x, y, getHeadingInRadians(), context, UNDER_THE_SHELL);
   }
 
-  protected void drawIcon(double x, double y, double headingInRadians, Graphics2D graphics) {
+  protected void drawIcon(double x, double y, double headingInRadians, Graphics2D context, UnderTheShell key) {
+    key.hashCode();
     if (!hidden) {
       AffineTransform transform = new AffineTransform(); // transformations are applied in reverse order
       transform.translate(x, y); // move turtle to location
       transform.rotate(headingInRadians); // orient turtle to heading
       transform.translate(-1 * getIcon().getWidth(), getIcon().getHeight() / -2.0); // move icon origin to turtle nose
-      graphics.drawImage(getIcon(), transform, null);
+      context.drawImage(getIcon(), transform, null);
     }
   }
 }
