@@ -158,8 +158,8 @@ public class AnimatedTurtle extends Turtle implements Runnable {
               steps = 0;
               break;
             case MOVE_TO:
-              double dx = active.getPointParam().getX() - x,
-                      dy = active.getPointParam().getY() - y;
+              double dx = active.getPointParam().getX() - getX(),
+                      dy = active.getPointParam().getY() - getY();
               targetSteps = Math.hypot(dx , dy);
               steps = 0;
               tempHeadingInRadians = Math.atan2(dy, dx);
@@ -243,10 +243,10 @@ public class AnimatedTurtle extends Turtle implements Runnable {
   }
 
   private void setShortestTurnAngle() {
-    if (Math.abs(headingInDegrees - active.getDoubleParam()) > 180.0) {
-      targetDegrees = (360 - Math.abs(headingInDegrees - active.getDoubleParam())) * (headingInDegrees > active.getDoubleParam() ? 1 : -1);
+    if (Math.abs(getHeadingInDegrees() - active.getDoubleParam()) > 180.0) {
+      targetDegrees = (360 - Math.abs(getHeadingInDegrees() - active.getDoubleParam())) * (getHeadingInDegrees() > active.getDoubleParam() ? 1 : -1);
     } else {
-      targetDegrees = headingInDegrees - active.getDoubleParam();
+      targetDegrees = getHeadingInDegrees() - active.getDoubleParam();
     }
   }
 
@@ -254,27 +254,27 @@ public class AnimatedTurtle extends Turtle implements Runnable {
     if (active == null) {
       super.draw(graphics);
     } else {
-      graphics.setPaint(penColor);
-      graphics.setStroke(penStroke);
+      graphics.setPaint(getPenColor());
+      graphics.setStroke(getPenStroke());
       switch (active.getVerb()) {
         case MOVE:
         case MOVE_TO:
           double moveHeadingInRadians = tempHeadingInRadians;
           if (active.getVerb() == Verb.MOVE) {
-            moveHeadingInRadians = headingInRadians();
+            moveHeadingInRadians = getHeadingInRadians();
           }
-          double tempX = x + Math.cos(moveHeadingInRadians) * steps;
-          double tempY = y + Math.sin(moveHeadingInRadians) * steps;
-          if (penDown) {
-            graphics.draw(new Line2D.Double(x, y, tempX, tempY));
+          double tempX = getX() + Math.cos(moveHeadingInRadians) * steps;
+          double tempY = getY() + Math.sin(moveHeadingInRadians) * steps;
+          if (isPenDown()) {
+            graphics.draw(new Line2D.Double(getX(), getY(), tempX, tempY));
           }
-          if (!hidden) {
-            drawIcon(tempX, tempY, headingInRadians(), graphics);
+          if (!isHidden()) {
+            drawIcon(tempX, tempY, getHeadingInRadians(), graphics);
           }
           break;
         case TURN:
-          if (!hidden) {
-            drawIcon(x, y, Math.toRadians(headingInDegrees + degrees), graphics);
+          if (!isHidden()) {
+            drawIcon(getX(), getY(), Math.toRadians(getHeadingInDegrees() + degrees), graphics);
           }
           break;
       }

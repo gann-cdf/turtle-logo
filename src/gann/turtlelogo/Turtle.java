@@ -13,22 +13,23 @@ public class Turtle {
           DEFAULT_CANVAS_HEIGHT = 400; // pixels
   public static final double DEFAULT_HEADING_IN_DEGREES = 0.0; // degrees
   public static final Color DEFAULT_COLOR = Color.black;
-  public static final Stroke DEFAULT_STROKE = new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+  public static final BasicStroke DEFAULT_STROKE = new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND);
+  public static final boolean DEFAULT_PEN_DOWN = true, DEFAULT_HIDDEN = false;
   public static final double
           NORTH = 270,
           SOUTH = 90,
           EAST = 0,
           WEST = 180;
 
-  private static Terrarium terrarium;
+  private Terrarium terrarium;
   private static BufferedImage icon;
 
-  protected double x, y;
-  protected double headingInDegrees;
-  protected Color penColor;
-  protected Stroke penStroke;
-  protected boolean penDown;
-  protected boolean hidden;
+  private double x, y;
+  private double headingInDegrees;
+  private Color penColor;
+  private BasicStroke penStroke;
+  private boolean penDown;
+  private boolean hidden;
 
   public Turtle() {
     this(DEFAULT_CANVAS_WIDTH, DEFAULT_CANVAS_HEIGHT);
@@ -40,15 +41,48 @@ public class Turtle {
     this.headingInDegrees = DEFAULT_HEADING_IN_DEGREES;
     this.penColor = DEFAULT_COLOR;
     this.penStroke = DEFAULT_STROKE;
-    this.penDown = true;
-    this.hidden = false;
-
-    initializeSingletonIcon();
-    initializeSingletonTerrarium();
-    terrarium.addTurtle(this);
+    this.penDown = DEFAULT_PEN_DOWN;
+    this.hidden = DEFAULT_HIDDEN;
+    getTerrarium();
   }
 
-  private void initializeSingletonIcon() {
+  public double getX() {
+    return x;
+  }
+
+  public double getY() {
+    return y;
+  }
+
+  public double getHeadingInDegrees() {
+    return headingInDegrees;
+  }
+
+  public double getHeadingInRadians() {
+    return Math.toRadians(headingInDegrees);
+  }
+
+  public Color getPenColor() {
+    return penColor;
+  }
+
+  public double getPenWidth() {
+    return penStroke.getLineWidth();
+  }
+
+  protected BasicStroke getPenStroke() {
+    return penStroke;
+  }
+
+  public boolean isPenDown() {
+    return penDown;
+  }
+
+  public boolean isHidden() {
+    return hidden;
+  }
+
+  private BufferedImage getIcon() {
     if (icon == null) {
       try {
         icon = ImageIO.read(getClass().getResource("/turtlelogo/turtle.png"));
@@ -56,16 +90,23 @@ public class Turtle {
         e.printStackTrace();
       }
     }
+    return icon;
   }
 
-  private void initializeSingletonTerrarium() {
+  public Terrarium getTerrarium() {
     if (terrarium == null) {
-      terrarium = new Terrarium();
+      terrarium = Terrarium.getInstance();
+      terrarium.add(this);
     }
+    return terrarium;
   }
 
-  protected double headingInRadians() {
-    return Math.toRadians(headingInDegrees);
+  public void setTerrarium(Terrarium terrarium) {
+    if (this.terrarium != null) {
+      this.terrarium.remove(this);
+    }
+    this.terrarium = terrarium;
+    terrarium.add(this);
   }
 
   public void bk(double steps) {
@@ -85,10 +126,10 @@ public class Turtle {
   }
 
   public void move(double steps) {
-    double newX = x + Math.cos(headingInRadians()) * steps,
-            newY = y + Math.sin(headingInRadians()) * steps;
+    double newX = x + Math.cos(getHeadingInRadians()) * steps,
+            newY = y + Math.sin(getHeadingInRadians()) * steps;
     if (penDown) {
-      terrarium.addTrack(new Track(x, y, newX, newY, penColor, penStroke));
+      getTerrarium().add(new Track(x, y, newX, newY, penColor, penStroke));
     }
     x = newX;
     y = newY;
@@ -100,7 +141,7 @@ public class Turtle {
 
   public void moveTo(double x, double y) {
     if (penDown) {
-      terrarium.addTrack(new Track(this.x, this.y, x, y, penColor, penStroke));
+      getTerrarium().add(new Track(this.x, this.y, x, y, penColor, penStroke));
     }
     this.x = x;
     this.y = y;
@@ -194,13 +235,8 @@ public class Turtle {
     hidden = false;
   }
 
-  public Terrarium getTerrarium() {
-    initializeSingletonTerrarium();
-    return terrarium;
-  }
-
   public void draw(Graphics2D graphics) {
-    drawIcon(x, y, headingInRadians(), graphics);
+    drawIcon(x, y, getHeadingInRadians(), graphics);
   }
 
   protected void drawIcon(double x, double y, double headingInRadians, Graphics2D graphics) {
@@ -208,8 +244,8 @@ public class Turtle {
       AffineTransform transform = new AffineTransform(); // transformations are applied in reverse order
       transform.translate(x, y); // move turtle to location
       transform.rotate(headingInRadians); // orient turtle to heading
-      transform.translate(-1 * icon.getWidth(), icon.getHeight() / -2.0); // move icon origin to turtle nose
-      graphics.drawImage(icon, transform, null);
+      transform.translate(-1 * getIcon().getWidth(), getIcon().getHeight() / -2.0); // move icon origin to turtle nose
+      graphics.drawImage(getIcon(), transform, null);
     }
   }
 }

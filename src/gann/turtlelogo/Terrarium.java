@@ -5,12 +5,16 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A turtle lives (and draws) inside a Terrarium;
+ */
 public class Terrarium extends JPanel {
   public static final int
           DEFAULT_WIDTH = 600,
           DEFAULT_HEIGHT = 400;
 
-  private static JFrame frame;
+  private static List<Terrarium> terraria;
+  private JFrame frame;
   private List<Turtle> turtles;
   private List<Track> tracks;
 
@@ -18,12 +22,32 @@ public class Terrarium extends JPanel {
     super();
     setPreferredSize(new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT));
     setBackground(Color.white);
-    initializeSingletonFrame();
     turtles = new ArrayList<>();
     tracks = new ArrayList<>();
+    getFrame();
+    register(this);
   }
 
-  private void initializeSingletonFrame() {
+  private static void register(Terrarium terrarium) {
+    if (terraria == null) {
+      terraria = new ArrayList<>();
+    }
+    terraria.add(terrarium);
+  }
+
+  public static Terrarium getInstance() {
+    return getInstance(0);
+  }
+
+  public static Terrarium getInstance(int index) {
+    if (terraria == null) {
+      terraria = new ArrayList<>();
+      terraria.add(new Terrarium());
+    }
+    return terraria.get(index);
+  }
+
+  private JFrame getFrame() {
     if (frame == null) {
       frame = new JFrame("Turtle Logo");
       frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -32,21 +56,34 @@ public class Terrarium extends JPanel {
       frame.setLocationRelativeTo(null);
       frame.setVisible(true);
     }
+    return frame;
   }
 
-  public synchronized void addTrack(Track track) {
+  public synchronized void add(Track track) {
     tracks.add(track);
   }
 
-  public synchronized void addTurtle(Turtle turtle) {
+  public synchronized void clear() {
+    tracks.clear();
+  }
+
+  public synchronized void add(Turtle turtle) {
     turtles.add(turtle);
+  }
+
+  public synchronized void remove(Turtle turtle) {
+    turtles.remove(turtle);
   }
 
   public void setSize(int width, int height) {
     setPreferredSize(new Dimension(width, height));
-    frame.pack();
-    frame.setLocationRelativeTo(null);
-    frame.repaint();
+    getFrame().pack();
+    getFrame().repaint();
+  }
+
+  public void setPosition(int x, int y) {
+    getFrame().setLocation(x, y);
+    getFrame().repaint();
   }
 
   @Override
