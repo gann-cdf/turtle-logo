@@ -1,7 +1,7 @@
 package example.turtlelogo;
 
-import gann.turtlelogo.AnimatedTurtle;
-import gann.turtlelogo.Turtle;
+import org.gannacademy.cdf.turtlelogo.AnimatedTurtle;
+import org.gannacademy.cdf.turtlelogo.Turtle;
 
 import java.awt.*;
 

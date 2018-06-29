@@ -1,16 +1,16 @@
 package example.turtlelogo;
 
-import gann.turtlelogo.AnimatedTurtle;
-import gann.turtlelogo.Terrarium;
-import gann.turtlelogo.Turtle;
+import org.gannacademy.cdf.turtlelogo.AnimatedTurtle;
+import org.gannacademy.cdf.turtlelogo.Terrarium;
+import org.gannacademy.cdf.turtlelogo.Turtle;
 
 import java.awt.*;
 
 public class TwoTerraria {
   public static void main(String[] args) {
-    Turtle red = new Turtle(), blue = new Turtle();
+    Turtle red = new AnimatedTurtle();
     Terrarium other = new Terrarium();
-    blue.setTerrarium(other);
+    Turtle blue = new AnimatedTurtle(other);
 
     red.getTerrarium().setBackground(new Color(255, 220, 220));
     blue.getTerrarium().setBackground(new Color(190, 240, 255));
