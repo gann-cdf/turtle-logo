@@ -4,7 +4,7 @@ Java-based turtle logo for introductory programming courses
 
 [Click for full documentation](https://gann-cdf.github.io/turtle-logo/)
 
- ## Design Philosophy<
+ ## Design Philosophy
 
 This package was designed specifically as a teaching tool. My main intention was to create a "safe" and engaging programming sandbox with clear visual feedback that leads directly and transparently into object-oriented design and programmin in Java. To that end, a few of the intentional design decisions are:
 
