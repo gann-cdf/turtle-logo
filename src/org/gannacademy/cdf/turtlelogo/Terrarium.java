@@ -23,7 +23,7 @@ import java.util.List;
  * via the {@link #getInstance()} method. When additional terraria have been instantiated, they may also be accessed
  * statically via their index (in instantiation order) using the {@link #getInstance(int)} method.</p>
  *
- * @author <a href="https://github.com/battis">Seth Battis</a>
+ * @author <a href="https://github.com/gann-cdf/turtlelogo/issues">Seth Battis</a>
  */
 public class Terrarium extends JPanel {
   /**
@@ -32,7 +32,7 @@ public class Terrarium extends JPanel {
    * version of the C++ <code>friend</code> concept: a public method that is only available to <i>some</i> other
    * objects, rather than <i>all</i> other objects.
    *
-   * @author <a href="https://github.com/battis">Seth Battis</a>
+   * @author <a href="https://github.com/gann-cdf/turtlelogo/issues">Seth Battis</a>
    */
   public static final class UnderTheSurface {
     private UnderTheSurface() {

@@ -6,7 +6,7 @@ import java.awt.geom.Line2D;
 /**
  * Turtles make visible tracks in terraria (by dragging their pens, of course)
  *
- * @author <a href="https://github.com/battis">Seth Battis</a>
+ * @author <a href="https://github.com/gann-cdf/turtlelogo/issues">Seth Battis</a>
  */
 public class Track {
   private Line2D.Double segment;

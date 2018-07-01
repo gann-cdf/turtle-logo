@@ -30,6 +30,6 @@
  *
  * <p style="text-align: center"><img src="../../../../images/cecil.png" alt="Cecil's output" style="border: solid 1px #ccc"></p>
  *
- * @author <a href="https://github.com/battis">Seth Battis</a>
+ * @author <a href="https://github.com/gann-cdf/turtlelogo/issues">Seth Battis</a>
  */
 package org.gannacademy.cdf.turtlelogo;

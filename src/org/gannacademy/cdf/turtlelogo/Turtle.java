@@ -68,7 +68,7 @@ public class Turtle {
    * version of the C++ <code>friend</code> concept: a public method that is only available to <i>some</i> other
    * objects, rather than <i>all</i> other objects.
    *
-   * @author <a href="https://github.com/battis">Seth Battis</a>
+   * @author <a href="https://github.com/gann-cdf/turtlelogo/issues">Seth Battis</a>
    */
   public static final class UnderTheShell {
     private UnderTheShell() {

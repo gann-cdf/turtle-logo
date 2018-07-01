@@ -10,7 +10,7 @@ import java.util.Queue;
  * Animated turtles are turtles that move more slowly, so that we can observe them following their instructions. Their
  * speed can be adjusted either when they are instantiated or as a separate instruction ({@link #speed(long)})
  *
- * @author <a href="https://github.com/battis">Seth Battis</a>
+ * @author <a href="https://github.com/gann-cdf/turtlelogo/issues">Seth Battis</a>
  */
 public class AnimatedTurtle extends Turtle implements Runnable {
 
