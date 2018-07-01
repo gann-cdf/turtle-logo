@@ -11,51 +11,51 @@ import java.io.IOException;
  * the terrarium, they leave a trail (a series of {@link Track} segments) behind them. The turtles can avoid leaving
  * a track if they pick up their pen.</p>
  *
- * <p style="text-align: center"><img src="../../../../images/trail.png" alt="Turtle leaving a trail"></p>
+ * <p style="text-align: center"><img src="doc-files/trail.png" alt="Turtle leaving a trail"></p>
  *
  * <p>Turtles understand a limited number of instructions:</p>
  *
  * <table style="margin-left: 4em;">
  * <tr>
- * <td><img src="../../../../images/move.png" alt="move() example"></td>
+ * <td><img src="doc-files/move.png" alt="move() example"></td>
  * <td><b>move(</b>
  * <i>steps</i><b>)</b> (a.k.a <i>forward</i> or <i>fd</i> and <i>back</i> or <i>bk</i>) &mdash; the turtle will step
  * forward, in the direction that it is currently facing, some number of steps (i.e. pixels).</td>
  * </tr>
  * <tr>
- * <td><img src="../../../../images/turn.png" alt="turn() example"></td>
+ * <td><img src="doc-files/turn.png" alt="turn() example"></td>
  * <td><b>turn(</b><i>degrees</i><b>)</b>
  * (a.k.a. <i>left</i> or <i>lt</i> and <i>right</i> or <i>rt</i>) &mdash; the turtle will turn from its current heading
  * some number of degrees.</td>
  * </tr>
  * <tr>
- * <td><img src="../../../../images/moveTo.png" alt="moveTo() example"></td>
+ * <td><img src="doc-files/moveTo.png" alt="moveTo() example"></td>
  * <td><b>moveTo(</b><i>x</i>, <i>y</i><b>)</b> (a.k.a. <i>to</i>) &mdash; the turtle will move from its current
  * location to the coordinates given, without changing its heading.</td>
  * </tr>
  * <tr>
- * <td><img src="../../../../images/teleport.png" alt="teleport() example"></td>
+ * <td><img src="doc-files/teleport.png" alt="teleport() example"></td>
  * <td><b>teleport(</b><i>x</i>, <i>y</i><b>)</b> (a.k.a. <i>tp</i>) &mdash; the turtle will teleport (like in Star
  * Trek) from its current location to the new coordinates, without changing its heading <i>and</i> without allowing the
  * pen to drag between locations.</td>
  * </tr>
  * <tr>
- * <td><img src="../../../../images/penColor.png" alt="penColor() example"></td>
+ * <td><img src="doc-files/penColor.png" alt="penColor() example"></td>
  * <td><b>penColor(</b><i>color</i><b>)</b> (a.k.a. <i>pc</i>) &mdash; the turtle will change the color of its pen
  * (initially the pen is black)</td>
  * </tr>
  * <tr>
- * <td><img src="../../../../images/penWidth.png" alt="penWidth() example"></td>
+ * <td><img src="doc-files/penWidth.png" alt="penWidth() example"></td>
  * <td><b>penWidth(</b><i>width</i><b>)</b> (a.k.a. <i>pw</i>) &mdash; the turtle will change the width of its pen
  * stroke (measured in pixels)</td>
  * </tr>
  * <tr>
- * <td><img src="../../../../images/hide.png" alt="hide() example"></td>
+ * <td><img src="doc-files/hide.png" alt="hide() example"></td>
  * <td><b>hide()</b> (a.k.a. <i>ht</i>) &mdash; the turtle will hide itself (but remain at its current location and
  * heading)</td>
  * </tr>
  * <tr>
- * <td><img src="../../../../images/show.png" alt="show() example"></td>
+ * <td><img src="doc-files/show.png" alt="show() example"></td>
  * <td><b>show()</b> (a.k.a. <i>st</i>) &mdash; the turtle, if hidden, will show itself again</td>
  * </tr>
  * <caption>&nbsp;</caption>

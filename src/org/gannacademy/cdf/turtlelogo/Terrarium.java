@@ -8,13 +8,13 @@ import java.util.List;
 /**
  * <p>A {@link Turtle} lives (and draws) inside a <code>Terrarium</code>.</p>
  *
- * <p style="text-align: center"><img src="../../../../images/trail.png" alt="Turtle leaving a trail"></p>
+ * <p style="text-align: center"><img src="doc-files/trail.png" alt="Turtle leaving a trail"></p>
  *
  * <p>A terrarium can be resized using the {@link #setSize(int, int)} method and repositioned on the screen using the
  * {@link #setPosition(int, int)}. The terrarium can also have a custom background color (set via the
  * {@link #setBackground(Color)} method &mdash; it defaults to white.</p>
  *
- * <p style="text-align: center"><img src="../../../../images/setBackground.png" alt="setBackground() example"></p>
+ * <p style="text-align: center"><img src="doc-files/setBackground.png" alt="setBackground() example"></p>
  *
  * <p>Initially, there is only a single terrarium, into which all new turtles are added. However, it is possible to
  * instantiate additional terraria, and to direct Turtles to them using the {@link Turtle#setTerrarium(Terrarium)}

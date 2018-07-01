@@ -6,7 +6,7 @@ import java.awt.*;
 import java.io.File;
 
 public class CreateDocsImages {
-  public static final String IMAGES_PATH = "docs/images";
+  public static final String BASE_PATH = "src/org/gannacademy/cdf/turtlelogo/doc-files";
 
   private static void deleteContents(File directory) {
     File[] contents = directory.listFiles();
@@ -22,19 +22,19 @@ public class CreateDocsImages {
   }
 
   private static void resetDirectory(String path) {
-    if (!new File(IMAGES_PATH).mkdirs()) {
-      deleteContents(new File(IMAGES_PATH));
+    if (!new File(BASE_PATH).mkdirs()) {
+      deleteContents(new File(BASE_PATH));
     }
   }
 
   private static String site(String name) {
-    return IMAGES_PATH + "/" + name + ".png";
+    return BASE_PATH + "/" + name + ".png";
   }
 
   public static void main(String[] args) {
     SavableTerrarium terrarium = new SavableTerrarium();
     Turtle turtle = new Turtle(terrarium);
-    resetDirectory(IMAGES_PATH);
+    resetDirectory(BASE_PATH);
 
     // cecil.png
     turtle.fd(100);

@@ -28,7 +28,7 @@
  *
  * <p>The output of this program would be:</p>
  *
- * <p style="text-align: center"><img src="../../../../images/cecil.png" alt="Cecil's output" style="border: solid 1px #ccc"></p>
+ * <p style="text-align: center"><img src="doc-files/cecil.png" alt="Cecil's output" style="border: solid 1px #ccc"></p>
  *
  * @author <a href="https://github.com/gann-cdf/turtlelogo/issues">Seth Battis</a>
  */
