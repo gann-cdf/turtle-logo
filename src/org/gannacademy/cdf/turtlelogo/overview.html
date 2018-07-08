@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Turtle Logo</title>
+</head>
+<body>
+
+<p>Turtle logo is an introduction to computer programming. We imagine that we are working with a turtle that is
+    holding a pen &mdash; presumably in its mouth. As the turtle roams around its terrarium, it drags the pen, leaving
+    tracks wherever it goes.</p>
+
+<h3>Sample Program</h3>
+
+<p>A simple example of a program to control a turtle might look something like this:</p>
+
+<pre>
+import org.gannacademy.cdf.turtlelogo.*;
+
+public class DrawASquare{
+  public static void main(String[] args) {
+    Turtle cecil = new Turtle(); // instantiate a new turtle
+
+    // give the turtle some instructions
+    cecil.fd(100);
+    cecil.lt(90);
+    cecil.fd(100);
+    cecil.lt(90);
+    cecil.fd(100);
+    cecil.lt(90);
+    cecil.fd(100);
+  }
+}
+</pre>
+
+<p>The output of this program would be:</p>
+
+<p><img src="org/gannacademy/cdf/turtlelogo/doc-files/cecil.png" alt="Cecil's output" style="border: solid 1px #ccc">
+</p>
+
+<h3>License</h3>
+
+<p>A turtle logo framework for Java AWT/Swing graphics</p>
+
+<p>Copyright &copy; 2018 Seth Battis</p>
+
+<p>This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.</p>
+
+<p>This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    GNU General Public License for more details.</p>
+
+<p> You should have received a copy of the GNU General Public License
+    along with this program. If not, see <a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>.</p>
+
+</body>
+</html>

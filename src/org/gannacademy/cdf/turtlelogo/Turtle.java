@@ -11,7 +11,7 @@ import java.io.IOException;
  * the terrarium, they leave a trail (a series of {@link Track} segments) behind them. The turtles can avoid leaving
  * a track if they pick up their pen.</p>
  *
- * <p style="text-align: center"><img src="doc-files/trail.png" alt="Turtle leaving a trail"></p>
+ * <p><img src="doc-files/trail.png" alt="Turtle leaving a trail"></p>
  *
  * <p>Turtles understand a limited number of instructions:</p>
  *
