@@ -4,6 +4,8 @@ Java-based turtle logo for introductory programming courses
 
 [Click for full documentation](https://gann-cdf.github.io/turtle-logo/)
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.gannacademy.cdf/turtle-logo/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.gannacademy.cdf/turtle-logo)  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gann-cdf/turtle-logo/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gann-cdf/turtle-logo/?branch=master)
+
  ## Design Philosophy
 
 This package was designed specifically as a teaching tool. My main intention was to create a "safe" and engaging programming sandbox with clear visual feedback that leads directly and transparently into object-oriented design and programmin in Java. To that end, a few of the intentional design decisions are:

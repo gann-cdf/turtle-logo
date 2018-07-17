@@ -6,7 +6,7 @@
 
     <groupId>org.gannacademy.cdf</groupId>
     <artifactId>turtle-logo</artifactId>
-    <version>1.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <name>Turtle Logo</name>
     <description>Java-based turtle logo for introductory programming courses</description>
     <url>https://github.com/gann-cdf/turtle-logo</url>
