@@ -8,6 +8,13 @@
     <option name="OPTION_DOCUMENT_TAG_VERSION" value="true" />
     <option name="OTHER_OPTIONS" value="-doctitle &quot;Turtle Logo&quot; -overview &quot;C:/Users/sbattis/Documents/GitHub/Turtle Logo/src/org/gannacademy/cdf/turtlelogo/overview.html&quot; -link https://docs.oracle.com/javase/8/docs/api/" />
   </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
