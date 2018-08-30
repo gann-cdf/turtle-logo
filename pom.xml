@@ -144,7 +144,7 @@
                         <configuration>
                             <includes>
                                 <include>**/org/gannacademy/cdf/turtlelogo/*</include>
-                                <exclide>**/org/gannacademy/cdf/turtlelogo/docs/*</exclide>
+                                <exclude>**/org/gannacademy/cdf/turtlelogo/docs/*</exclude>
                             </includes>
                         </configuration>
                     </plugin>
