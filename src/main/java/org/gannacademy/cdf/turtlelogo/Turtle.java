@@ -220,7 +220,7 @@ public class Turtle {
   private BufferedImage getIcon() {
     if (icon == null) {
       try {
-        icon = ImageIO.read(getClass().getResource("/turtlelogo/turtle.png"));
+        icon = ImageIO.read(getClass().getResource("/turtle.png"));
       } catch (IOException e) {
         System.err.println("The image file containing the turtle icon could not be found and/or opened.");
         e.printStackTrace();
