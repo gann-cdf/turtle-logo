@@ -1,7 +1,15 @@
 package org.gannacademy.cdf.turtlelogo;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +33,7 @@ import java.util.List;
  *
  * @author <a href="https://github.com/gann-cdf/turtlelogo/issues">Seth Battis</a>
  */
-public class Terrarium extends JPanel {
+public class Terrarium extends JPanel implements KeyListener {
   /**
    * The parts of the terrarium that are "under the surface" are not meant to be used by students. This mechanism
    * (inspired by <a href="https://stackoverflow.com/a/18634125">this awesome Stack Overflow answer</a>) recreates a
@@ -61,6 +69,8 @@ public class Terrarium extends JPanel {
   private List<Turtle> turtles;
   private List<Track> tracks;
 
+  private static final int CONTROL_KEY_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+
   /**
    * Construct a new terrarium of default dimensions, centered on the screen in its own window
    */
@@ -71,6 +81,8 @@ public class Terrarium extends JPanel {
     turtles = new ArrayList<>();
     tracks = new ArrayList<>();
     getFrame();
+    this.addKeyListener(this);
+    this.requestFocus();
     addInstance(this);
   }
 
@@ -220,6 +232,75 @@ public class Terrarium extends JPanel {
     }
     for (Turtle turtle : turtles) {
       turtle.draw(context, UNDER_THE_SURFACE);
+    }
+  }
+
+  /**
+   * Draw the contents of the terrarium to a file
+   *
+   * @param path Path to the file to be saved as a PNG
+   */
+  public void drawTo(String path) {
+    drawTo(path, "PNG");
+  }
+
+  /**
+   * Draw the contents of the terrarium to a file
+   *
+   * @param path   Path to the file to be saved
+   * @param format Format in which to save the file (anyting accepted by <a href="https://docs.oracle.com/javase/10/docs/api/javax/imageio/ImageIO.html#write(java.awt.image.RenderedImage,java.lang.String,java.io.File)">ImageIO.write()</a>)
+   */
+  public void drawTo(String path, String format) {
+    try {
+      BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_ARGB);
+      Graphics2D context = image.createGraphics();
+      context.setPaint(getBackground());
+      context.fillRect(0, 0, image.getWidth(), image.getHeight());
+      draw(context);
+      ImageIO.write(image, format, new File(path));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * Handle keyboard input
+   *
+   * @param e
+   */
+  @Override
+  public void keyTyped(KeyEvent e) {
+  }
+
+  /**
+   * Handle keyboard input
+   *
+   * @param e
+   */
+  @Override
+  public void keyPressed(KeyEvent e) {
+  }
+
+  /**
+   * Handle keyboard input
+   *
+   * @param e
+   */
+  @Override
+  public void keyReleased(KeyEvent e) {
+    if (e.getKeyCode() == KeyEvent.VK_S && ((e.getModifiers() | CONTROL_KEY_MASK) == CONTROL_KEY_MASK)) {
+      JFileChooser fileChooser = new JFileChooser();
+      FileFilter pngFilter = new FileNameExtensionFilter("PNG files", "png");
+      fileChooser.addChoosableFileFilter(pngFilter);
+      fileChooser.setFileFilter(pngFilter);
+      fileChooser.setDialogTitle("Save terrarium contents…");
+      if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+        String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+        if (!filePath.toLowerCase().endsWith(".png")) {
+          filePath = filePath + ".png";
+        }
+        drawTo(filePath);
+      }
     }
   }
 }

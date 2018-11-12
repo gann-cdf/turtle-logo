@@ -1,7 +1,6 @@
 package example.turtlelogo;
 
 import org.gannacademy.cdf.turtlelogo.Turtle;
-import org.gannacademy.cdf.turtlelogo.docs.SavableTerrarium;
 
 public class Hearts {
     public static void arc(Turtle turtle, double radius, double arcLength) {
@@ -27,14 +26,13 @@ public class Hearts {
     }
 
     public static void main(String[] args) {
-        SavableTerrarium terrarium = new SavableTerrarium();
-        Turtle clarence = new Turtle(terrarium);
+        Turtle clarence = new Turtle();
         clarence.head(Turtle.NORTH);
         heart(clarence, 100);
         clarence.tp(100, 100);
         heart(clarence, 50);
         clarence.tp(200, 150);
         heart(clarence, 300);
-        terrarium.drawTo("hearts.png");
+        clarence.getTerrarium().drawTo("hearts.png");
     }
 }

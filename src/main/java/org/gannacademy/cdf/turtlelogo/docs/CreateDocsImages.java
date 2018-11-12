@@ -1,5 +1,6 @@
 package org.gannacademy.cdf.turtlelogo.docs;
 
+import org.gannacademy.cdf.turtlelogo.Terrarium;
 import org.gannacademy.cdf.turtlelogo.Turtle;
 
 import java.awt.*;
@@ -32,8 +33,8 @@ public class CreateDocsImages {
   }
 
   public static void main(String[] args) {
-    SavableTerrarium terrarium = new SavableTerrarium();
-    Turtle turtle = new Turtle(terrarium);
+    Turtle turtle = new Turtle();
+    Terrarium terrarium = turtle.getTerrarium();
     resetDirectory(BASE_PATH);
 
     // cecil.png

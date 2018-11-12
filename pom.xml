@@ -6,7 +6,7 @@
 
     <groupId>org.gannacademy.cdf</groupId>
     <artifactId>turtle-logo</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <name>Turtle Logo</name>
     <description>Java-based turtle logo for introductory programming courses</description>
     <url>https://github.com/gann-cdf/turtle-logo</url>
@@ -155,14 +155,6 @@
             </build>
         </profile>
     </profiles>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <scm.url>scm:git:https://github.com/gann-cdf/turtle-logo.git</scm.url>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
 
     <distributionManagement>
         <snapshotRepository>
