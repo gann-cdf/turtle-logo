@@ -27,7 +27,6 @@ public class Squares {
                 }
             }
         }
-
         boxer.getTerrarium().drawTo("squares.png");
     }
 }

@@ -32,7 +32,7 @@
 
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/gann-cdf/graphics/issues</url>
+        <url>${project.scm.url}/issues</url>
     </issueManagement>
 
     <build>
@@ -58,6 +58,14 @@
                     <nexusUrl>https://oss.sonatype.org</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     <!--<skipStagingRepositoryClose>true</skipStagingRepositoryClose>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>10</source>
+                    <target>10</target>
                 </configuration>
             </plugin>
         </plugins>
@@ -168,8 +176,8 @@
     </distributionManagement>
 
     <scm>
-        <connection>${scm.url}</connection>
-        <developerConnection>${scm.url}</developerConnection>
-        <url>${scm.url}</url>
+        <connection>${project.scm.url}</connection>
+        <developerConnection>${project.scm.url}</developerConnection>
+        <url>https://github.com/gann-cdf/turtle-logo</url>
     </scm>
 </project>

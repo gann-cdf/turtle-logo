@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Turtle Logo" target="1.5" />
+      <module name="Turtle Logo" target="10" />
     </bytecodeTargetLevel>
   </component>
 </project>

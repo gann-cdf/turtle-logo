@@ -9,9 +9,9 @@ import java.awt.geom.Line2D;
  * @author <a href="https://github.com/gann-cdf/turtlelogo/issues">Seth Battis</a>
  */
 public class Track {
-  private Line2D.Double segment;
-  private Stroke stroke;
-  private Color color;
+  private final Line2D.Double segment;
+  private final Stroke stroke;
+  private final Color color;
 
   /**
    * <p>Construct a new track segment</p>
@@ -27,7 +27,7 @@ public class Track {
    * @param key    to authenticate "Turtleness"
    */
   public Track(double x1, double y1, double x2, double y2, Color color, Stroke stroke, Turtle.UnderTheShell key) {
-    key.hashCode();
+    assert key != null;
     segment = new Line2D.Double(x1, y1, x2, y2);
     this.color = color;
     this.stroke = stroke;
@@ -42,7 +42,7 @@ public class Track {
    * @param key     to authenticate "Terrarium-iality"
    */
   public void draw(Graphics2D context, Terrarium.UnderTheSurface key) {
-    key.hashCode();
+    assert key != null;
     context.setPaint(color);
     context.setStroke(stroke);
     context.draw(segment);

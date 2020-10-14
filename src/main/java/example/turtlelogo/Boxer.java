@@ -12,7 +12,7 @@ public class Boxer implements Runnable {
 
     public Boxer() {
         boxer = new AnimatedTurtle(1);
-        new Thread(this).start();
+        new Thread(this, "Boxer").start();
     }
 
     @Override
